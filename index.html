@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>svg-vertex-editor</title>
+    <link rel="stylesheet" href="app.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="status-message" class="hidden"></div>
+
+    <h1 class="title">
+      Edit a vertex map for an SVG
+    </h1>
+
+    <section id="file-load-section">
+      <div>Pick an SVG file to load.</div>
+      <input type="file" id="svg-file" accept="image/svg+xml" />
+    </section>
+
+    <button id="run-decomp-button">Run poly-decomp-js on SVG</button>
+    <button id="load-vertices-button">Load vertices</button>
+    <button id="list-vertices-button">List vertices as JSON</button>
+
+    <svg id="board" width="1000" height="1000">
+      <g id="svg-contents"></g>
+      <g id="vertices"></g>
+    </svg>
+
+    <div id="version-info"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
