@@ -66,9 +66,7 @@ svg {
 }
 
 circle {
-  stroke: #444;
-  stroke-width: 0.1;
-  fill: hsla(0, 0%, 0%, 0.05);
+  fill: hsla(300, 50%, 50%, 0.75);
 }
 
 @media all and (max-height: 568px) {

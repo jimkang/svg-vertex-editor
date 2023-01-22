@@ -4,7 +4,7 @@ import { getPathsFromSVG } from '../util/svg-utils';
 import { Svg } from 'matter-js';
 
 export function getVerticesFromDecomp({ svgRoot }) {
-  var paths = getPathsFromSVG(svgRoot);
+  var paths = getPathsFromSVG({ svgNode: svgRoot, discardTransforms: true });
   var vertices = paths
     .map(path => Svg.pathToVertices(path, 30))
     .flat()
