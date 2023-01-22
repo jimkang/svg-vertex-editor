@@ -3,10 +3,13 @@ import handleError from 'handle-error-web';
 import { version } from './package.json';
 import { select } from 'd3-selection';
 import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
+import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
+import { renderVertexSets } from './renderers/render-vertex-sets';
 
 var routeState;
 var loadedSVGRoot;
+var loadedVertexSets;
 
 (async function go() {
   window.onerror = reportTopLevelError;
@@ -22,6 +25,7 @@ var loadedSVGRoot;
 
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
+  select('#run-decomp-button').on('click', onDecompClick);
 }
 
 function onSVGFileChange() {
@@ -40,6 +44,21 @@ function onSVGFileChange() {
 function onSVGDOM({ root }) {
   loadedSVGRoot = root;
   renderSVG({ root });
+}
+
+function onDecompClick() {
+  if (!loadedSVGRoot) {
+    throw new Error('No SVG loaded.');
+  }
+
+  var vertexSets = getVerticesFromDecomp({ svgRoot: loadedSVGRoot, onVertexSets });
+  onVertexSets({ vertexSets });
+}
+
+function onVertexSets({ vertexSets }) {
+  loadedVertexSets = vertexSets;
+  console.log(vertexSets);
+  renderVertexSets(vertexSets);
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {

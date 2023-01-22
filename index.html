@@ -18,12 +18,13 @@
       <input type="file" id="svg-file" accept="image/svg+xml" />
     </section>
 
-    <button id="run-decomp-button">Run poly-decomp-js on SVG</button>
+    <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
     <button id="load-vertices-button">Load vertices</button>
     <button id="list-vertices-button">List vertices as JSON</button>
 
     <svg id="board" width="1000" height="1000">
       <g id="svg-contents"></g>
+      <g id="vertex-sets"></g>
       <g id="vertices"></g>
     </svg>
 

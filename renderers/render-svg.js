@@ -1,10 +1,11 @@
+import { getPathsFromSVG } from '../util/svg-utils';
+
 var svgContentsNode = document.getElementById('svg-contents');
 
 export function renderSVG({ root }) {
   var paths = getPathsFromSVG(root);
-  paths.forEach(path => svgContentsNode.appendChild(path));
+  // cloneNode is necessary because appending it here will remove it from its
+  // source tree.
+  paths.forEach(path => svgContentsNode.appendChild(path.cloneNode()));
 }
 
-function getPathsFromSVG(svgNode) {
-  return Array.from(svgNode.querySelectorAll('path'));
-}
