@@ -13,6 +13,6 @@ export function getVerticesFromDecomp({ svgRoot }) {
   decomp.makeCCW(vertices);
   decomp.removeCollinearPoints(vertices, 0.01);
   decomp.removeDuplicatePoints(vertices, 0.01);
-  return decomp.quickDecomp(vertices);
+  return decomp.quickDecomp(vertices).flat();
 }
 

@@ -1,19 +1,9 @@
 import { select } from 'd3-selection';
 
-var vertexSetsRoot = select('#vertex-sets');
+var verticesRoot = select('#vertices');
 
-export function renderVertexSets(vertexSets) {
-  var setGroups = vertexSetsRoot.selectAll('g').data(vertexSets);
-  setGroups.exit().remove();
-  var currentSetGroups = setGroups.enter().append('g')
-    .merge(setGroups);
-
-  currentSetGroups.each(renderGroup);
-}
-
-function renderGroup() {
-  var groupSel = select(this);
-  var points = groupSel.selectAll('circle').data(d => d);
+export function renderVertices(vertices) {
+  var points = verticesRoot.selectAll('circle').data(vertices);
   points.exit().remove();
   points.enter().append('circle')
     .attr('r', 2)

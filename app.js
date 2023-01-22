@@ -5,11 +5,11 @@ import { select } from 'd3-selection';
 import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
 import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
-import { renderVertexSets } from './renderers/render-vertex-sets';
+import { renderVertices } from './renderers/render-vertex-sets';
 
 var routeState;
 var loadedSVGRoot;
-var loadedVertexSets;
+var loadedVertices;
 
 (async function go() {
   window.onerror = reportTopLevelError;
@@ -51,14 +51,14 @@ function onDecompClick() {
     throw new Error('No SVG loaded.');
   }
 
-  var vertexSets = getVerticesFromDecomp({ svgRoot: loadedSVGRoot, onVertexSets });
-  onVertexSets({ vertexSets });
+  var vertices = getVerticesFromDecomp({ svgRoot: loadedSVGRoot, onVertices });
+  onVertices({ vertices });
 }
 
-function onVertexSets({ vertexSets }) {
-  loadedVertexSets = vertexSets;
-  console.log(vertexSets);
-  renderVertexSets(vertexSets);
+function onVertices({ vertices }) {
+  loadedVertices = vertices;
+  console.log(vertices);
+  renderVertices(vertices);
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {
