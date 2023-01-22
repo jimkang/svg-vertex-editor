@@ -5,7 +5,7 @@ import { select } from 'd3-selection';
 import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
 import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
-import { renderVertices } from './renderers/render-vertex-sets';
+import { renderVertices } from './renderers/render-vertices';
 
 var routeState;
 var loadedSVGRoot;
