@@ -7,6 +7,7 @@ import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
 import { renderAddMode } from './renderers/render-add-mode';
+import { renderPrintVertices } from './renderers/render-print-vertices';
 
 var routeState;
 var loadedSVGRoot;
@@ -67,6 +68,7 @@ function onDecompClick() {
 function onVertices({ vertices }) {
   loadedVertices = vertices;
   renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode });
+  renderPrintVertices({ vertices: loadedVertices });
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {

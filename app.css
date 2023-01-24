@@ -69,6 +69,11 @@ circle {
   fill: hsla(300, 50%, 50%, 0.75);
 }
 
+textarea {
+  width: 20em;
+  height: 20em;
+}
+
 @media all and (max-height: 568px) {
   body {
     font-size: 18px;

@@ -20,7 +20,7 @@
 
     <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
     <button id="load-vertices-button">Load vertices</button>
-    <button id="list-vertices-button">List vertices as JSON</button>
+    <button id="print-vertices-button">Print vertices as JSON</button>
 
     <p>Hold shift while clicking points to delete them.</p>
     <button id="add-mode-toggle"></button>
@@ -29,6 +29,8 @@
       <g id="svg-contents"></g>
       <g id="vertices"></g>
     </svg>
+
+    <textarea id="json-area"></textarea>
 
     <div id="version-info"></div>
 
