@@ -58,7 +58,7 @@ function onDecompClick() {
 function onVertices({ vertices }) {
   loadedVertices = vertices;
   console.log(vertices);
-  renderVertices(vertices);
+  renderVertices({ vertices, onVerticesChange: onVertices });
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {
