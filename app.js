@@ -6,10 +6,12 @@ import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
 import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
+import { renderAddMode } from './renderers/render-add-mode';
 
 var routeState;
 var loadedSVGRoot;
-var loadedVertices;
+var loadedVertices = [];
+var addMode = false;
 
 (async function go() {
   window.onerror = reportTopLevelError;
@@ -26,6 +28,13 @@ var loadedVertices;
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
+  renderAddMode({ addMode, onAddModeChange });
+}
+
+function onAddModeChange() {
+  addMode = !addMode;
+  renderAddMode({ addMode, onAddModeChange });
+  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode });
 }
 
 function onSVGFileChange() {
@@ -57,8 +66,7 @@ function onDecompClick() {
 
 function onVertices({ vertices }) {
   loadedVertices = vertices;
-  console.log(vertices);
-  renderVertices({ vertices, onVerticesChange: onVertices });
+  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode });
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {
