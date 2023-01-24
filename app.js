@@ -7,12 +7,14 @@ import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
 import { renderAddMode } from './renderers/render-add-mode';
+import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderPrintVertices } from './renderers/render-print-vertices';
 
 var routeState;
 var loadedSVGRoot;
 var loadedVertices = [];
 var addMode = false;
+var deleteMode = false;
 
 (async function go() {
   window.onerror = reportTopLevelError;
@@ -30,12 +32,20 @@ function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
   renderAddMode({ addMode, onAddModeChange });
+  renderDeleteMode({ deleteMode, onDeleteModeChange });
 }
 
 function onAddModeChange() {
   addMode = !addMode;
   renderAddMode({ addMode, onAddModeChange });
-  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode });
+  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
+}
+
+
+function onDeleteModeChange() {
+  deleteMode = !deleteMode;
+  renderDeleteMode({ deleteMode, onDeleteModeChange });
+  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
 }
 
 function onSVGFileChange() {
@@ -67,7 +77,7 @@ function onDecompClick() {
 
 function onVertices({ vertices }) {
   loadedVertices = vertices;
-  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode });
+  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
   renderPrintVertices({ vertices: loadedVertices });
 }
 

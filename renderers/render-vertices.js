@@ -5,7 +5,7 @@ var board = select('#board');
 var verticesRoot = select('#vertices');
 var index = local();
 
-export function renderVertices({ vertices, onVerticesChange, addMode }) {
+export function renderVertices({ vertices, onVerticesChange, addMode, deleteMode }) {
   var points = verticesRoot.selectAll('circle').data(vertices);
   points.exit().remove();
   points.enter().append('circle')
@@ -22,8 +22,8 @@ export function renderVertices({ vertices, onVerticesChange, addMode }) {
     index.set(this, i);
   }
 
-  function onCircleClick(e) {
-    if (e.shiftKey) {
+  function onCircleClick() {
+    if (deleteMode) {
       let editedVertices = vertices.slice();
       editedVertices.splice(index.get(this), 1);
       onVerticesChange({ vertices: editedVertices });
@@ -33,7 +33,6 @@ export function renderVertices({ vertices, onVerticesChange, addMode }) {
   function onBoardClick(e) {
     if (addMode) {
       let point = pointer(e);
-      console.log(point);
       let editedVertices = vertices.slice();
       editedVertices.push(point);
       onVerticesChange({ vertices: editedVertices });
