@@ -10,6 +10,7 @@ import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderPrintVertices } from './renderers/render-print-vertices';
 import { renderLoadVertices } from './renderers/render-load-vertices';
+import { cleanVertices } from './util/svg-utils';
 
 var routeState;
 var loadedSVGRoot;
@@ -78,7 +79,7 @@ function onDecompClick() {
 }
 
 function onVertices({ vertices }) {
-  loadedVertices = vertices;
+  loadedVertices = cleanVertices(vertices);
   renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
   renderPrintVertices({ vertices: loadedVertices });
 }
