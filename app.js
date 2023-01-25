@@ -9,6 +9,7 @@ import { renderVertices } from './renderers/render-vertices';
 import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderPrintVertices } from './renderers/render-print-vertices';
+import { renderLoadVertices } from './renderers/render-load-vertices';
 
 var routeState;
 var loadedSVGRoot;
@@ -33,6 +34,7 @@ function followRoute() {
   select('#run-decomp-button').on('click', onDecompClick);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
+  renderLoadVertices({ onVertices });
 }
 
 function onAddModeChange() {

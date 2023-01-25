@@ -18,19 +18,23 @@
       <input type="file" id="svg-file" accept="image/svg+xml" />
     </section>
 
-    <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
-    <button id="load-vertices-button">Load vertices</button>
-    <button id="print-vertices-button">Print vertices as JSON</button>
+    <main>
+      <div class="sidebar">
+        <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
 
-    <button id="add-mode-toggle"></button>
-    <button id="delete-mode-toggle"></button>
+        <button id="add-mode-toggle"></button>
+        <button id="delete-mode-toggle"></button>
+        <button id="print-vertices-button">Print vertices to text</button>
+        <button id="load-vertices-button">Load vertices from text</button>
+        <textarea id="json-area"></textarea>
+        </div>
 
-    <svg id="board" width="1000" height="1000">
-      <g id="svg-contents"></g>
-      <g id="vertices"></g>
-    </svg>
+      <svg id="board" width="1000" height="1000">
+        <g id="svg-contents"></g>
+        <g id="vertices"></g>
+      </svg>
+    </main>
 
-    <textarea id="json-area"></textarea>
 
     <div id="version-info"></div>
 
