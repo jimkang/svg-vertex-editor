@@ -8,8 +8,7 @@ import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
 import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
-import { renderPrintVertices } from './renderers/render-print-vertices';
-import { renderLoadVertices } from './renderers/render-load-vertices';
+import { renderTextControls } from './renderers/render-text-controls';
 import { cleanVertices } from './util/svg-utils';
 
 var routeState;
@@ -35,7 +34,7 @@ function followRoute() {
   select('#run-decomp-button').on('click', onDecompClick);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
-  renderLoadVertices({ onVertices });
+  renderTextControls({ onVertices, vertices: loadedVertices });
 }
 
 function onAddModeChange() {
@@ -81,7 +80,7 @@ function onDecompClick() {
 function onVertices({ vertices }) {
   loadedVertices = cleanVertices(vertices);
   renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
-  renderPrintVertices({ vertices: loadedVertices });
+  renderTextControls({ onVertices, vertices: loadedVertices });
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {
