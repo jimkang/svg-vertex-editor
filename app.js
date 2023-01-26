@@ -40,14 +40,23 @@ function followRoute() {
 function onAddModeChange() {
   addMode = !addMode;
   renderAddMode({ addMode, onAddModeChange });
-  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
+  renderVertices({
+    vertices: loadedVertices,
+    onVerticesChange: onVertices,
+    addMode,
+    deleteMode,
+  });
 }
-
 
 function onDeleteModeChange() {
   deleteMode = !deleteMode;
   renderDeleteMode({ deleteMode, onDeleteModeChange });
-  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
+  renderVertices({
+    vertices: loadedVertices,
+    onVerticesChange: onVertices,
+    addMode,
+    deleteMode,
+  });
 }
 
 function onSVGFileChange() {
@@ -79,7 +88,12 @@ function onDecompClick() {
 
 function onVertices({ vertices }) {
   loadedVertices = cleanVertices(vertices);
-  renderVertices({ vertices: loadedVertices, onVerticesChange: onVertices, addMode, deleteMode });
+  renderVertices({
+    vertices: loadedVertices,
+    onVerticesChange: onVertices,
+    addMode,
+    deleteMode,
+  });
   renderTextControls({ onVertices, vertices: loadedVertices });
 }
 

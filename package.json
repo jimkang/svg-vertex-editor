@@ -39,6 +39,7 @@
     "one-listener-per-element": "^1.0.1",
     "pathseg": "^1.2.1",
     "poly-decomp": "^0.3.0",
+    "prettier": "^2.8.3",
     "route-state": "^2.0.5",
     "strokerouter": "^2.0.0"
   }
