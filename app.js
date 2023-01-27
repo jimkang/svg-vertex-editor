@@ -32,6 +32,7 @@ var deleteMode = false;
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
+  select('#convert-to-path-button').on('click', onConvertToPathClick);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
@@ -84,6 +85,15 @@ function onDecompClick() {
 
   var vertices = getVerticesFromDecomp({ svgRoot: loadedSVGRoot, onVertices });
   onVertices({ vertices });
+}
+
+function onConvertToPathClick() {
+  select('#path-field').text(
+    loadedVertices
+      .flat()
+      .map((x) => x.toFixed(2))
+      .join(' ')
+  );
 }
 
 function onVertices({ vertices }) {
