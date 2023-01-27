@@ -8,12 +8,15 @@ export function renderTextControls({ vertices, onVertices }) {
   loadButton.on('click', load);
 
   function load() {
-    var vertices = JSON.parse(jsonAreaNode.value);
+    var vertices = JSON.parse(jsonAreaNode.value).map((v) => [v.x, v.y]);
     onVertices({ vertices });
   }
 
   function print() {
-    jsonAreaNode.value = JSON.stringify(vertices, null, 2);
+    jsonAreaNode.value = JSON.stringify(
+      vertices.map((v) => ({ x: v[0], y: v[1] })),
+      null,
+      2
+    );
   }
 }
-
