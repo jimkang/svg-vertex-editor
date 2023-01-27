@@ -10,9 +10,8 @@ var configs = [
     outputFile: 'index.js',
     reloadPath: '.',
     serve: !process.env.APP && serve,
-    serveOpts: { port: 7000 },
+    serveOpts: { port: 7001 },
   },
-]
-  .map(createConfig);
+].map(createConfig);
 
 export default configs;
