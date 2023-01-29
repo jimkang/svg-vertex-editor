@@ -5,9 +5,8 @@ var svgContentsNode = document.getElementById('svg-contents');
 
 export function renderSVG({ root }) {
   select(svgContentsNode).selectAll('path').remove();
-  var paths = getPathsFromSVG({ svgNode: root, discardTransforms: true });
+  var paths = getPathsFromSVG({ svgNode: root, discardTransforms: false });
   // cloneNode is necessary because appending it here will remove it from its
   // source tree.
-  paths.forEach(path => svgContentsNode.appendChild(path.cloneNode()));
+  paths.forEach((path) => svgContentsNode.appendChild(path.cloneNode()));
 }
-
