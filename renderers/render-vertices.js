@@ -5,18 +5,34 @@ var board = select('#board');
 var verticesRoot = select('#vertices');
 var index = local();
 
-export function renderVertices({ vertices, onVerticesChange, addMode, deleteMode }) {
+var bboxField = document.getElementById('vertices-bbox-field');
+
+export function renderVertices({
+  vertices,
+  onVerticesChange,
+  addMode,
+  deleteMode,
+}) {
   var points = verticesRoot.selectAll('circle').data(vertices);
   points.exit().remove();
-  points.enter().append('circle')
+  points
+    .enter()
+    .append('circle')
     .attr('r', 2)
     .each(saveIndex)
     .merge(points)
     .on('click', onCircleClick)
-    .attr('cx', pt => pt[0])
-    .attr('cy', pt => pt[1]);
+    .attr('cx', (pt) => pt[0])
+    .attr('cy', (pt) => pt[1]);
 
   board.on('click', onBoardClick);
+
+  var bbox = verticesRoot.node().getBBox();
+  bboxField.textContent = JSON.stringify(
+    { width: bbox.width.toFixed(2), height: bbox.height.toFixed(2) },
+    null,
+    2
+  );
 
   function saveIndex(d, i) {
     index.set(this, i);
