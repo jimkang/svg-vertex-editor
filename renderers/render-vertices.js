@@ -29,7 +29,10 @@ export function renderVertices({
 
   var bbox = verticesRoot.node().getBBox();
   bboxField.textContent = JSON.stringify(
-    { width: bbox.width.toFixed(2), height: bbox.height.toFixed(2) },
+    {
+      verticesWidth: +bbox.width.toFixed(2),
+      verticesHeight: +bbox.height.toFixed(2),
+    },
     null,
     2
   );
