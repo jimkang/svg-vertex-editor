@@ -16,6 +16,7 @@ var loadedSVGRoot;
 var loadedVertices = [];
 var addMode = false;
 var deleteMode = false;
+var offsetsField = document.getElementById('vertices-offsets-field');
 
 (async function go() {
   window.onerror = reportTopLevelError;
@@ -95,6 +96,17 @@ function onVertices({ vertices }) {
     deleteMode,
   });
   renderTextControls({ onVertices, vertices: loadedVertices });
+
+  var verticesRoot = document.getElementById('vertices');
+  var svgRoot = document.getElementById('svg-contents');
+  if (verticesRoot && svgRoot) {
+    let verticesBBox = verticesRoot.getBBox();
+    let svgBBox = svgRoot.getBBox();
+    offsetsField.value = `"verticesOffset": {
+    "x": ${+(verticesBBox.x - svgBBox.x).toFixed(2)},
+    "y": ${+(verticesBBox.y - svgBBox.y).toFixed(2)}
+    }`;
+  }
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {

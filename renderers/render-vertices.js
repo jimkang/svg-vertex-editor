@@ -6,6 +6,7 @@ var verticesRoot = select('#vertices');
 var index = local();
 
 var bboxField = document.getElementById('vertices-bbox-field');
+var offsetsField = document.getElementById('vertices-offsets-field');
 
 export function renderVertices({
   vertices,
