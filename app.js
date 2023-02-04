@@ -103,8 +103,8 @@ function onVertices({ vertices }) {
     let verticesBBox = verticesRoot.getBBox();
     let svgBBox = svgRoot.getBBox();
     offsetsField.value = `"verticesOffset": {
-    "x": ${+(verticesBBox.x - svgBBox.x).toFixed(2)},
-    "y": ${+(verticesBBox.y - svgBBox.y).toFixed(2)}
+    "x": ${+(Math.max(verticesBBox.x, 0) - Math.max(svgBBox.x, 0)).toFixed(2)},
+    "y": ${+(Math.max(verticesBBox.y, 0) - Math.max(svgBBox.y, 0)).toFixed(2)}
     }`;
   }
 }
