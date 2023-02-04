@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>svg-vertex-editor</title>
+    <title>Vertex overlay editor</title>
     <link rel="stylesheet" href="app.css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,39 +10,48 @@
     <div id="status-message" class="hidden"></div>
 
     <h1 class="title">
-      Edit a vertex map for an SVG
+      Vertex overlay editor
     </h1>
 
-    <section id="file-load-section">
-      <div>Pick an SVG file to load.</div>
-      <input type="file" id="svg-file" accept="image/svg+xml" />
-    </section>
-
     <main>
-      <div class="sidebar">
-        <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
-        <button id="decomp-vertices-button">Run poly-decomp-js on vertices</button>
-        <button id="add-mode-toggle"></button>
-        <button id="delete-mode-toggle"></button>
-        <button id="load-vertices-button">Load vertices from text</button>
-        <textarea id="json-area"></textarea>
-        <button id="convert-to-path-button">Convert to path</button>
-        <input id="path-field"></input>
-        <button id="convert-from-path-button">Convert path commands to vertices</button>
+      <section>
+        <h3>Board</h3>
+        <div id="file-load-section">
+          <div>Pick an SVG file to load.</div>
+          <input type="file" id="svg-file" accept="image/svg+xml" />
         </div>
 
-      <svg id="board" width="1000" height="1000">
-        <g id="svg-contents"></g>
-        <g id="vertices"></g>
-      </svg>
+        <svg id="board" width="1000" height="1000">
+          <g id="svg-contents"></g>
+          <g id="vertices"></g>
+        </svg>
 
-      <h3>SVG bbox</h3>
-      <div id="svg-bbox-field"></div>
-      <h3>Vertices bbox</h3>
-      <div id="vertices-bbox-field"></div>
-      <h3>Vertices offsets</h3>
-      <textarea id="vertices-offsets-field"></textarea>
+      </section>
+
+      <section>
+        <h3>Numbers</h3>
+
+        <h4>Vertices JSON</h4>
+        <textarea id="json-area"></textarea>
+        <h4>SVG bbox</h4>
+        <div id="svg-bbox-field"></div>
+        <h4>Vertices bbox</h4>
+        <div id="vertices-bbox-field"></div>
+        <h4>Vertices offsets</h4>
+        <textarea id="vertices-offsets-field"></textarea>
+      </section>
     </main>
+
+    <div class="control-bar">
+      <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
+      <button id="decomp-vertices-button">Run poly-decomp-js on vertices</button>
+      <button id="add-mode-toggle"></button>
+      <button id="delete-mode-toggle"></button>
+      <button id="load-vertices-button">Load vertices from text</button>
+      <button id="convert-to-path-button">Convert to path</button>
+      <input id="path-field"></input>
+      <button id="convert-from-path-button">Convert path commands to vertices</button>
+    </div>
 
 
     <div id="version-info"></div>
