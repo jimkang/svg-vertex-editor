@@ -32,13 +32,15 @@
         <h3>Numbers</h3>
 
         <h4>Vertices JSON</h4>
-        <textarea id="json-area"></textarea>
+        <textarea id="json-area" rows="16"></textarea>
         <h4>SVG bbox</h4>
         <div id="svg-bbox-field"></div>
         <h4>Vertices bbox</h4>
         <div id="vertices-bbox-field"></div>
         <h4>Vertices offsets</h4>
-        <textarea id="vertices-offsets-field"></textarea>
+        <textarea id="vertices-offsets-field" rows="4"></textarea>
+        <h4>Path (coordinate pairs, not SVG paths)</h4>
+      <input id="path-field"></input>
       </section>
     </main>
 
@@ -50,7 +52,6 @@
       <button id="load-vertices-button">Load vertices from text</button>
       <button id="move-vertices-button">Move vertices to upper left</button>
       <button id="convert-to-path-button">Convert to path</button>
-      <input id="path-field"></input>
       <button id="convert-from-path-button">Convert path commands to vertices</button>
     </div>
 
