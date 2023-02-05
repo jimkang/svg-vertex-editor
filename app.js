@@ -33,6 +33,7 @@ var offsetsField = document.getElementById('vertices-offsets-field');
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
+  select('#move-vertices-button').on('click', onMoveVertices);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
@@ -87,6 +88,22 @@ function onDecompClick() {
   onVertices({ vertices });
 }
 
+function onMoveVertices() {
+  const cornerX = loadedVertices.reduce(
+    (lowX, pair) => (pair[0] < lowX ? pair[0] : lowX),
+    Infinity
+  );
+  const cornerY = loadedVertices.reduce(
+    (lowY, pair) => (pair[1] < lowY ? pair[1] : lowY),
+    Infinity
+  );
+  onVertices({
+    vertices: loadedVertices
+      .map((pair) => [pair[0] - cornerX, pair[1] - cornerY])
+      .map((n) => [+n[0].toFixed(2), +n[1].toFixed(2)]),
+  });
+}
+
 function onVertices({ vertices }) {
   loadedVertices = cleanVertices(vertices);
   renderVertices({
@@ -104,7 +121,7 @@ function onVertices({ vertices }) {
     let svgBBox = svgRoot.getBBox();
     offsetsField.value = `"verticesOffset": {
     "x": ${+(Math.max(verticesBBox.x, 0) - Math.max(svgBBox.x, 0)).toFixed(2)},
-    "y": ${+(Math.max(verticesBBox.y, 0) - Math.max(svgBBox.y, 0)).toFixed(2)}
+    "y": ${+(verticesBBox.y - svgBBox.y).toFixed(2)}
     }`;
   }
 }
