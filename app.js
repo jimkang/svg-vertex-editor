@@ -98,9 +98,10 @@ function onMoveVertices() {
     Infinity
   );
   onVertices({
-    vertices: loadedVertices
-      .map((pair) => [pair[0] - cornerX, pair[1] - cornerY])
-      .map((n) => [+n[0].toFixed(2), +n[1].toFixed(2)]),
+    vertices: loadedVertices.map((pair) => [
+      pair[0] - cornerX,
+      pair[1] - cornerY,
+    ]),
   });
 }
 
