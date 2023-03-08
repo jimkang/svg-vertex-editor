@@ -16,10 +16,6 @@
     <main>
       <section>
         <h3>Board</h3>
-        <div id="file-load-section">
-          <div>Pick an SVG file to load.</div>
-          <input type="file" id="svg-file" accept="image/svg+xml" />
-        </div>
 
         <svg id="board" width="1000" height="1000">
           <g id="svg-contents"></g>
@@ -48,6 +44,10 @@
     </main>
 
     <div class="control-bar">
+        <div id="file-load-section">
+          <div>Load an SVG file</div>
+          <input type="file" id="svg-file" accept="image/svg+xml" />
+        </div>
       <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
       <button id="decomp-vertices-button">Run poly-decomp-js on vertices</button>
       <button id="add-mode-toggle"></button>
