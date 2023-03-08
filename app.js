@@ -10,6 +10,7 @@ import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderTextControls } from './renderers/render-text-controls';
 import { cleanVertices } from './util/svg-utils';
+import { pairsToXYObjects } from './util/formats';
 
 var routeState;
 var loadedSVGRoot;
@@ -98,10 +99,9 @@ function onMoveVertices() {
     Infinity
   );
   onVertices({
-    vertices: loadedVertices.map((pair) => [
-      pair[0] - cornerX,
-      pair[1] - cornerY,
-    ]),
+    vertices: pairsToXYObjects(
+      loadedVertices.map((pair) => [pair[0] - cornerX, pair[1] - cornerY])
+    ),
   });
 }
 
