@@ -45,8 +45,11 @@
 
     <div class="control-bar">
         <div id="file-load-section">
-          <div>Load an SVG file</div>
+          <label for="svg-file">Load an SVG file</label>
           <input type="file" id="svg-file" accept="image/svg+xml" />
+          <br><br>
+          <label >Load a def file</label>
+          <input type="file" id="def-file" accept="text" />
         </div>
       <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
       <button id="decomp-vertices-button">Run poly-decomp-js on vertices</button>

@@ -33,6 +33,7 @@ var offsetsField = document.getElementById('vertices-offsets-field');
 
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
+  select('#def-file').on('change', onDefFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
   select('#move-vertices-button').on('click', onMoveVertices);
   renderAddMode({ addMode, onAddModeChange });
@@ -72,6 +73,34 @@ function onSVGFileChange() {
 
   function onSVGTextLoad(e) {
     svgTextToSVGDOM({ text: e.target.result, onSVGDOM });
+  }
+}
+
+function onDefFileChange() {
+  var file = this.files[0];
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = onDefLoad;
+    reader.readAsText(file);
+  }
+
+  async function onDefLoad(e) {
+    const text = e.target.result;
+    const startObjIndex = text.lastIndexOf('= {') + 2;
+    const defText = `(${text.slice(startObjIndex, -2)})`;
+    console.log(defText);
+    var def = window.eval(defText);
+
+    // TODO: Other directions' svgs, other locations.
+    //var res = await fetch(
+    //`http://localhost:7000/static/svg/${def.svgSrcForDirections.default}`,
+    //{ mode: 'no-cors' }
+    //);
+    // // Why does this give us an empty string ever though the xhr worked?
+    //const svgText = await res.text();
+    //console.log('svgText', svgText);
+    //svgTextToSVGDOM({ text: svgText, onSVGDOM });
+    onVertices({ vertices: def.vertices });
   }
 }
 
