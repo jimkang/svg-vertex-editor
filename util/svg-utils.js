@@ -14,8 +14,5 @@ export function cleanVertices(vertices) {
     decomp.removeCollinearPoints(vertices, 0.01);
     decomp.removeDuplicatePoints(vertices, 0.01);
   }
-  if (vertices.length > 0) {
-    return vertices.map((n) => [+n.x.toFixed(2), +n.y.toFixed(2)]);
-  }
   return vertices;
 }

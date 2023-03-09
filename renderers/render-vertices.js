@@ -1,4 +1,5 @@
 import { select, local, pointer } from 'd3-selection';
+import { pairToXY } from '../util/formats';
 //import { drag } from 'd3-drag';
 
 var board = select('#board');
@@ -7,6 +8,7 @@ var index = local();
 
 var bboxField = document.getElementById('vertices-bbox-field');
 
+// TODO: Types.
 export function renderVertices({
   vertices,
   onVerticesChange,
@@ -22,8 +24,8 @@ export function renderVertices({
     .each(saveIndex)
     .merge(points)
     .on('click', onCircleClick)
-    .attr('cx', (pt) => pt[0])
-    .attr('cy', (pt) => pt[1]);
+    .attr('cx', (pt) => pt.x)
+    .attr('cy', (pt) => pt.y);
 
   board.on('click', onBoardClick);
 
@@ -53,7 +55,7 @@ export function renderVertices({
     if (addMode) {
       let point = pointer(e);
       let editedVertices = vertices.slice();
-      editedVertices.push(point);
+      editedVertices.push(pairToXY(point));
       onVerticesChange({ vertices: editedVertices });
     }
   }

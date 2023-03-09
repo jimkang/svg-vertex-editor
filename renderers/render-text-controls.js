@@ -1,9 +1,9 @@
 import { select } from 'd3-selection';
-import { pairsToXYObjects } from '../util/formats';
+//import { pairsToXYObjects } from '../util/formats';
 
 var loadButton = select('#load-vertices-button');
 var jsonAreaNode = document.getElementById('json-area');
-var xyModeCheckbox = document.getElementById('xy-mode-checkbox');
+//var xyModeCheckbox = document.getElementById('xy-mode-checkbox');
 
 export function renderTextControls({ vertices, onVertices }) {
   print();
@@ -17,11 +17,7 @@ export function renderTextControls({ vertices, onVertices }) {
   }
 
   function print() {
-    var formattedVertices = xyModeCheckbox.checked
-      ? pairsToXYObjects(vertices)
-      : vertices;
-
-    jsonAreaNode.value = JSON.stringify(formattedVertices, null, 2);
+    jsonAreaNode.value = JSON.stringify(vertices, null, 2);
   }
 
   function onConvertToPathClick() {
