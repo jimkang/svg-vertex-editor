@@ -17,7 +17,11 @@ export function renderTextControls({ vertices, onVertices }) {
   }
 
   function print() {
-    jsonAreaNode.value = JSON.stringify(vertices, null, 2);
+    jsonAreaNode.value = JSON.stringify(
+      vertices.map(({ x, y }) => ({ x: +x.toFixed(2), y: +y.toFixed(2) })),
+      null,
+      2
+    );
   }
 
   function onConvertToPathClick() {

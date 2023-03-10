@@ -10,7 +10,6 @@ export function getPathsFromSVG({ svgNode, discardTransforms }) {
 
 export function cleanVertices(vertices) {
   if (vertices.length > 2) {
-    decomp.makeCCW(vertices);
     decomp.removeCollinearPoints(vertices, 0.01);
     decomp.removeDuplicatePoints(vertices, 0.01);
   }
