@@ -1,6 +1,6 @@
 {
   "name": "svg-vertex-editor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Edit a vertex map for an SVG",
   "main": "index.js",
   "private": true,
