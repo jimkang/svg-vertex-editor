@@ -9,7 +9,7 @@ import { renderVertices } from './renderers/render-vertices';
 import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderTextControls } from './renderers/render-text-controls';
-import { cleanVertices } from './util/svg-utils';
+import { cleanVertices, ccwSortVertices } from './util/svg-utils';
 import { pairsToXYObjects } from './util/formats';
 
 var routeState;
@@ -36,6 +36,7 @@ function followRoute() {
   select('#def-file').on('change', onDefFileChange);
   select('#run-decomp-button').on('click', onDecompClick);
   select('#move-vertices-button').on('click', onMoveVertices);
+  select('#ccw-button').on('click', onCCWClick);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
@@ -132,6 +133,10 @@ function onMoveVertices() {
       loadedVertices.map((pair) => [pair[0] - cornerX, pair[1] - cornerY])
     ),
   });
+}
+
+function onCCWClick() {
+  onVertices({ vertices: ccwSortVertices(loadedVertices) });
 }
 
 function onVertices({ vertices }) {

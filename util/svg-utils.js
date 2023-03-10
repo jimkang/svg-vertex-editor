@@ -16,3 +16,10 @@ export function cleanVertices(vertices) {
   }
   return vertices;
 }
+
+export function ccwSortVertices(vertices) {
+  if (vertices.length > 2) {
+    decomp.makeCCW(vertices);
+  }
+  return vertices;
+}
