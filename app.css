@@ -125,6 +125,17 @@ h3, h4 {
   margin-bottom: 1em;
 }
 
+#bones {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 2;
+}
+
+#meat {
+  stroke: hsl(0, 50%, 30%);
+  fill: hsl(10, 60%, 50%);
+}
+
 @media all and (max-height: 568px) {
   body {
     font-size: 18px;

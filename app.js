@@ -6,9 +6,11 @@ import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
 import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
+import { renderMeat } from './renderers/render-meat';
 import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderTextControls } from './renderers/render-text-controls';
+import { renderEnmeatenMode } from './renderers/render-enmeaten-mode';
 import { cleanVertices, ccwSortVertices } from './util/svg-utils';
 import { pairsToXYObjects } from './util/formats';
 
@@ -17,6 +19,7 @@ var loadedSVGRoot;
 var loadedVertices = [];
 var addMode = false;
 var deleteMode = false;
+var enmeatenMode = false;
 var offsetsField = document.getElementById('vertices-offsets-field');
 
 // TODO: Get coords into [x, y]. Then, enmeaten them!
@@ -41,6 +44,7 @@ function followRoute() {
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
+  renderEnmeatenMode({ enmeatenMode, onEnmeatenModeChange });
 }
 
 function onAddModeChange() {
@@ -62,6 +66,15 @@ function onDeleteModeChange() {
     onVerticesChange: onVertices,
     addMode,
     deleteMode,
+  });
+}
+
+function onEnmeatenModeChange() {
+  enmeatenMode = !enmeatenMode;
+  renderEnmeatenMode({ enmeatenMode, onEnmeatenModeChange });
+  renderMeat({
+    vertices: loadedVertices,
+    enmeatenMode,
   });
 }
 
