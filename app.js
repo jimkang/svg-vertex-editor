@@ -19,6 +19,7 @@ var addMode = false;
 var deleteMode = false;
 var offsetsField = document.getElementById('vertices-offsets-field');
 
+// TODO: Get coords into [x, y]. Then, enmeaten them!
 (async function go() {
   window.onerror = reportTopLevelError;
   renderVersion();

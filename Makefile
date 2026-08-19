@@ -1,4 +1,4 @@
-include config.mk
+# include ../config.mk
 
 HOMEDIR = $(shell pwd)
 rollup = ./node_modules/.bin/rollup
