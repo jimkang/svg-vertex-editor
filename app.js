@@ -173,6 +173,11 @@ function onVertices({ vertices }) {
     "y": ${+(verticesBBox.y - svgBBox.y).toFixed(2)}
     }`;
   }
+
+  renderMeat({
+    vertices: loadedVertices,
+    enmeatenMode,
+  });
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {

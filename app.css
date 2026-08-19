@@ -128,12 +128,12 @@ h3, h4 {
 #bones {
   fill: none;
   stroke: #eee;
-  stroke-width: 2;
+  stroke-width: 4;
 }
 
 #meat {
   stroke: hsl(0, 50%, 30%);
-  fill: hsl(10, 60%, 50%);
+  fill: hsl(350, 60%, 50%);
 }
 
 @media all and (max-height: 568px) {
