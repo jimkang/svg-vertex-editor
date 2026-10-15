@@ -19,7 +19,7 @@ export function renderVertices({
   points
     .enter()
     .append('circle')
-    .attr('r', 2)
+    .attr('r', 1)
     .each(saveIndex)
     .merge(points)
     .on('click', onCircleClick)

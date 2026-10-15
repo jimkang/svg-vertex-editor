@@ -1,9 +1,16 @@
 import { getPathsFromSVG } from '../util/svg-utils';
 import { select } from 'd3-selection';
+import { zoom as Zoom } from 'd3-zoom';
+
+var boardSel = select('#board');
+var zoomRoot = boardSel.select('#zoom-root');
+var zoom = Zoom().scaleExtent([1, 8]).on('zoom', zoomed);
+boardSel.call(zoom);
 
 var svgContentsNode = document.getElementById('svg-contents');
 var bboxField = document.getElementById('svg-bbox-field');
 
+// Next: Add zoom
 export function renderSVG({ root }) {
   select(svgContentsNode).selectAll('path').remove();
   var paths = getPathsFromSVG({ svgNode: root, discardTransforms: false });
@@ -19,4 +26,8 @@ export function renderSVG({ root }) {
     null,
     2
   );
+}
+
+function zoomed(zoomEvent) {
+  zoomRoot.attr('transform', zoomEvent.transform);
 }

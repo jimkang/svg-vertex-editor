@@ -127,8 +127,8 @@ h3, h4 {
 
 #bones {
   fill: none;
-  stroke: #eee;
-  stroke-width: 4;
+  stroke: hsla(0, 0%, 95%, 0.5);
+  stroke-width: 1;
 }
 
 #meat {
