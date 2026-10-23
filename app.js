@@ -20,6 +20,7 @@ var loadedVertices = [];
 var addMode = false;
 var deleteMode = false;
 var enmeatenMode = false;
+var enmeatenCurveFnName;
 var offsetsField = document.getElementById('vertices-offsets-field');
 
 // TODO: Get coords into [x, y]. Then, enmeaten them!
@@ -44,7 +45,11 @@ function followRoute() {
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
-  renderEnmeatenMode({ enmeatenMode, onEnmeatenModeChange });
+  renderEnmeatenMode({
+    enmeatenMode,
+    onEnmeatenModeChange,
+    onEnmeatenCurveFnChange,
+  });
 }
 
 function onAddModeChange() {
@@ -71,10 +76,24 @@ function onDeleteModeChange() {
 
 function onEnmeatenModeChange() {
   enmeatenMode = !enmeatenMode;
-  renderEnmeatenMode({ enmeatenMode, onEnmeatenModeChange });
+  renderEnmeatenMode({
+    enmeatenMode,
+    onEnmeatenModeChange,
+    onEnmeatenCurveFnChange,
+  });
   renderMeat({
     vertices: loadedVertices,
     enmeatenMode,
+    enmeatenCurveFnName,
+  });
+}
+
+function onEnmeatenCurveFnChange(e) {
+  enmeatenCurveFnName = e.target.value;
+  renderMeat({
+    vertices: loadedVertices,
+    enmeatenMode,
+    enmeatenCurveFnName,
   });
 }
 
@@ -177,6 +196,7 @@ function onVertices({ vertices }) {
   renderMeat({
     vertices: loadedVertices,
     enmeatenMode,
+    enmeatenCurveFnName,
   });
 }
 
