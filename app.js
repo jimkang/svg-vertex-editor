@@ -38,6 +38,7 @@ var extraRoundness = 0;
   routeState.routeFromHash();
 })();
 
+// TODO: Get state into route.
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#def-file').on('change', onDefFileChange);
@@ -58,6 +59,7 @@ function callRenderEnmeatenControls() {
     onEnmeatenModeChange,
     onEnmeatenCurveFnChange,
     onEnmeatenExtraRoundnessChange,
+    onEnmeatenSeedChange,
   });
 }
 
@@ -106,6 +108,11 @@ function onEnmeatenCurveFnChange(e) {
 
 function onEnmeatenExtraRoundnessChange(e) {
   extraRoundness = e.target.value;
+  callRenderMeat();
+}
+
+function onEnmeatenSeedChange(e) {
+  seed = e.target.value;
   callRenderMeat();
 }
 
@@ -209,6 +216,7 @@ function onVertices({ vertices }) {
     vertices: loadedVertices,
     enmeatenMode,
     enmeatenCurveFnName,
+    seed,
   });
 }
 

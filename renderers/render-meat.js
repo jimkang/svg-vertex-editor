@@ -2,6 +2,7 @@ import { select } from 'd3-selection';
 import { line, curveLinear, curveBasisClosed } from 'd3-shape';
 import bezierShaper from 'enmeaten/lib/bezier-shaper';
 import Enmeaten from 'enmeaten';
+import seedrandom from 'seedrandom';
 
 var meatPathSel = select('#meat');
 var bonesPathSel = select('#bones');
@@ -16,6 +17,7 @@ export function renderMeat({
   enmeatenMode,
   extraRoundness = 0,
   enmeatenCurveFnName = 'curveBasisClosed',
+  seed,
 }) {
   var meatPath;
 
@@ -31,7 +33,7 @@ export function renderMeat({
   const meatLine = line();
 
   // TODO: seedrandom
-  var enmeaten = Enmeaten({ random: Math.random });
+  var enmeaten = Enmeaten({ random: seed ? seedrandom(seed) : Math.random });
   var meatPoints = enmeaten({ bone: vertices, extraRoundness });
   // To consider: Is there a way to make the bezierShaper conform to the curveBasis
   // API or vice versa?

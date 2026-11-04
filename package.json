@@ -44,6 +44,7 @@
     "poly-decomp": "^0.3.0",
     "prettier": "^2.8.3",
     "route-state": "^2.0.5",
+    "seedrandom": "^3.0.5",
     "strokerouter": "^2.0.0"
   }
 }

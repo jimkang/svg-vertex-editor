@@ -3,7 +3,7 @@ import { select } from 'd3-selection';
 var enmeatenModeToggle = select('#enmeaten-mode-toggle');
 var curveFnSelectSel = select('#enmeaten-curve-fn');
 var extraRoundnessSel = select('#enmeaten-roundness-slider');
-var seedTextSel = select('#enmeaten-seed');
+var seedTextSel = select('#enmeaten-seed-text');
 
 var curveFnNames = ['curveBasisClosed', 'bezierShaper'];
 var optsSel = curveFnSelectSel.selectAll('option').data(curveFnNames);
@@ -20,6 +20,7 @@ export function renderEnmeatenMode({
   onEnmeatenModeChange,
   onEnmeatenCurveFnChange,
   onEnmeatenExtraRoundnessChange,
+  onEnmeatenSeedChange,
 }) {
   extraRoundnessSel.node().value = extraRoundness;
   seedTextSel.text(seed);
@@ -27,6 +28,7 @@ export function renderEnmeatenMode({
   enmeatenModeToggle.on('click', onEnmeatenModeChange);
   curveFnSelectSel.on('change', onEnmeatenCurveFnChange);
   extraRoundnessSel.on('change', onEnmeatenExtraRoundnessChange);
+  seedTextSel.on('keyup', onEnmeatenSeedChange);
 
   enmeatenModeToggle.text(
     enmeatenMode ? 'Turn off Enmeaten mode' : 'Turn on Enmeaten mode'
