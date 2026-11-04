@@ -14,6 +14,7 @@ var curveFnByName = {
 export function renderMeat({
   vertices,
   enmeatenMode,
+  extraRoundness = 0,
   enmeatenCurveFnName = 'curveBasisClosed',
 }) {
   var meatPath;
@@ -31,7 +32,7 @@ export function renderMeat({
 
   // TODO: seedrandom
   var enmeaten = Enmeaten({ random: Math.random });
-  var meatPoints = enmeaten({ bone: vertices, extraRoundness: 15 });
+  var meatPoints = enmeaten({ bone: vertices, extraRoundness });
   // To consider: Is there a way to make the bezierShaper conform to the curveBasis
   // API or vice versa?
   if (enmeatenCurveFnName === 'bezierShaper') {
