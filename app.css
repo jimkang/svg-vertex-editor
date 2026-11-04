@@ -82,6 +82,7 @@ textarea {
 
 main {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   padding: 4px;
   justify-content: space-between;
@@ -99,7 +100,8 @@ section {
   color: #444;
 }
 
-h3, h4 {
+h3,
+h4 {
   margin-top: 0;
 }
 

@@ -5,7 +5,7 @@ var curveFnSelectSel = select('#enmeaten-curve-fn');
 var extraRoundnessSel = select('#enmeaten-roundness-slider');
 var seedTextSel = select('#enmeaten-seed-text');
 
-var curveFnNames = ['curveBasisClosed', 'bezierShaper'];
+var curveFnNames = ['bezierShaper', 'curveBasisClosed'];
 var optsSel = curveFnSelectSel.selectAll('option').data(curveFnNames);
 optsSel
   .enter()

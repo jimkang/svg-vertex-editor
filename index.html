@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Vertex overlay editor</title>
+    <title>Enmeaten editor</title>
     <link rel="stylesheet" href="app.css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,8 +55,6 @@
           <label >Load a def file</label>
           <input type="file" id="def-file" accept="text" />
         </div>
-      <button id="run-decomp-button">Run poly-decomp-js on SVG</button> (Warning: Extremely slow on paths with more than 1000 points)
-      <button id="decomp-vertices-button">Run poly-decomp-js on vertices</button>
       <button id="enmeaten-mode-toggle"></button>
       <label for="enmeaten-curve-fn">Enmeaten curve function</label>
       <select id="enmeaten-curve-fn"></select>
@@ -68,9 +66,6 @@
       <button id="delete-mode-toggle"></button>
       <button id="load-vertices-button">Load vertices from text</button>
       <button id="move-vertices-button">Move vertices to upper left</button>
-      <button id="convert-to-path-button">Convert to path</button>
-      <button id="convert-from-path-button">Convert path commands to vertices</button>
-      <button id="ccw-button">Make vertices counterclockwise</button>
     </div>
 
 

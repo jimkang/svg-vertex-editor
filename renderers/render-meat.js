@@ -8,8 +8,8 @@ var meatPathSel = select('#meat');
 var bonesPathSel = select('#bones');
 
 var curveFnByName = {
-  curveBasisClosed: curveBasisClosed,
-  bezierShaper: bezierShaper,
+  curveBasisClosed,
+  bezierShaper,
 };
 
 export function renderMeat({

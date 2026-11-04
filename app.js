@@ -3,7 +3,6 @@ import handleError from 'handle-error-web';
 import { version } from './package.json';
 import { select } from 'd3-selection';
 import { svgTextToSVGDOM } from './updaters/svg-text-to-svg-dom';
-import { getVerticesFromDecomp } from './updaters/get-vertices-from-decomp';
 import { renderSVG } from './renderers/render-svg';
 import { renderVertices } from './renderers/render-vertices';
 import { renderMeat } from './renderers/render-meat';
@@ -11,16 +10,15 @@ import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderTextControls } from './renderers/render-text-controls';
 import { renderEnmeatenMode } from './renderers/render-enmeaten-mode';
-import { cleanVertices, ccwSortVertices } from './util/svg-utils';
+import { cleanVertices } from './util/svg-utils';
 import { pairsToXYObjects } from './util/formats';
 
 var routeState;
-var loadedSVGRoot;
 var loadedVertices = [];
 var addMode = false;
 var deleteMode = false;
-var enmeatenMode = false;
-var enmeatenCurveFnName;
+var enmeatenMode = true;
+var enmeatenCurveFnName = 'bezierShaper';
 var offsetsField = document.getElementById('vertices-offsets-field');
 var seed;
 var extraRoundness = 0;
@@ -42,9 +40,7 @@ var extraRoundness = 0;
 function followRoute() {
   select('#svg-file').on('change', onSVGFileChange);
   select('#def-file').on('change', onDefFileChange);
-  select('#run-decomp-button').on('click', onDecompClick);
   select('#move-vertices-button').on('click', onMoveVertices);
-  select('#ccw-button').on('click', onCCWClick);
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
@@ -64,6 +60,9 @@ function callRenderEnmeatenControls() {
 }
 
 function callRenderMeat() {
+  if (!loadedVertices) {
+    return;
+  }
   renderMeat({
     vertices: loadedVertices,
     enmeatenMode,
@@ -158,17 +157,7 @@ function onDefFileChange() {
 }
 
 function onSVGDOM({ root }) {
-  loadedSVGRoot = root;
   renderSVG({ root });
-}
-
-function onDecompClick() {
-  if (!loadedSVGRoot) {
-    throw new Error('No SVG loaded.');
-  }
-
-  var vertices = getVerticesFromDecomp({ svgRoot: loadedSVGRoot, onVertices });
-  onVertices({ vertices });
 }
 
 function onMoveVertices() {
@@ -185,10 +174,6 @@ function onMoveVertices() {
       loadedVertices.map((pair) => [pair[0] - cornerX, pair[1] - cornerY])
     ),
   });
-}
-
-function onCCWClick() {
-  onVertices({ vertices: ccwSortVertices(loadedVertices) });
 }
 
 function onVertices({ vertices }) {
