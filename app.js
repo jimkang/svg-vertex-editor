@@ -17,7 +17,6 @@ var routeState;
 var loadedVertices = [];
 var addMode = false;
 var deleteMode = false;
-var enmeatenMode = true;
 var enmeatenCurveFnName = 'bezierShaper';
 var offsetsField = document.getElementById('vertices-offsets-field');
 var seed;
@@ -49,10 +48,8 @@ function followRoute() {
 
 function callRenderEnmeatenControls() {
   renderEnmeatenMode({
-    enmeatenMode,
     extraRoundness,
     seed,
-    onEnmeatenModeChange,
     onEnmeatenCurveFnChange,
     onEnmeatenExtraRoundnessChange,
     onEnmeatenSeedChange,
@@ -65,7 +62,6 @@ function callRenderMeat() {
   }
   renderMeat({
     vertices: loadedVertices,
-    enmeatenMode,
     enmeatenCurveFnName,
     extraRoundness,
     seed,
@@ -92,12 +88,6 @@ function onDeleteModeChange() {
     addMode,
     deleteMode,
   });
-}
-
-function onEnmeatenModeChange() {
-  enmeatenMode = !enmeatenMode;
-  callRenderEnmeatenControls();
-  callRenderMeat();
 }
 
 function onEnmeatenCurveFnChange(e) {
@@ -199,7 +189,6 @@ function onVertices({ vertices }) {
 
   renderMeat({
     vertices: loadedVertices,
-    enmeatenMode,
     enmeatenCurveFnName,
     seed,
   });

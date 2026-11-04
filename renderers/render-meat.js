@@ -14,18 +14,14 @@ var curveFnByName = {
 
 export function renderMeat({
   vertices,
-  enmeatenMode,
   extraRoundness = 0,
   enmeatenCurveFnName = 'curveBasisClosed',
   seed,
 }) {
   var meatPath;
 
-  meatPathSel.attr('opacity', enmeatenMode ? 1 : 0);
-  bonesPathSel.attr('opacity', enmeatenMode ? 1 : 0);
-  if (!enmeatenMode) {
-    return;
-  }
+  meatPathSel.attr('opacity', 1);
+  bonesPathSel.attr('opacity', 1);
 
   const boneLine = line();
   boneLine.curve(curveLinear);
