@@ -90,13 +90,12 @@ main {
 
 section {
   min-width: 400px;
-  width: 48%;
+  width: 66%;
   overflow: scroll;
   border: solid 2px hsla(0, 0%, 0%, 0.5);
   border-radius: 4px;
   flex-grow: 1;
   padding: 8px;
-  height: 400px;
   color: #444;
 }
 
