@@ -22,6 +22,8 @@ var deleteMode = false;
 var enmeatenMode = false;
 var enmeatenCurveFnName;
 var offsetsField = document.getElementById('vertices-offsets-field');
+var seed;
+var extraRoundness = 0;
 
 // TODO: Get coords into [x, y]. Then, enmeaten them!
 (async function go() {
@@ -45,10 +47,27 @@ function followRoute() {
   renderAddMode({ addMode, onAddModeChange });
   renderDeleteMode({ deleteMode, onDeleteModeChange });
   renderTextControls({ onVertices, vertices: loadedVertices });
+  callRenderEnmeatenControls();
+}
+
+function callRenderEnmeatenControls() {
   renderEnmeatenMode({
     enmeatenMode,
+    extraRoundness,
+    seed,
     onEnmeatenModeChange,
     onEnmeatenCurveFnChange,
+    onEnmeatenExtraRoundnessChange,
+  });
+}
+
+function callRenderMeat() {
+  renderMeat({
+    vertices: loadedVertices,
+    enmeatenMode,
+    enmeatenCurveFnName,
+    extraRoundness,
+    seed,
   });
 }
 
@@ -76,25 +95,18 @@ function onDeleteModeChange() {
 
 function onEnmeatenModeChange() {
   enmeatenMode = !enmeatenMode;
-  renderEnmeatenMode({
-    enmeatenMode,
-    onEnmeatenModeChange,
-    onEnmeatenCurveFnChange,
-  });
-  renderMeat({
-    vertices: loadedVertices,
-    enmeatenMode,
-    enmeatenCurveFnName,
-  });
+  callRenderEnmeatenControls();
+  callRenderMeat();
 }
 
 function onEnmeatenCurveFnChange(e) {
   enmeatenCurveFnName = e.target.value;
-  renderMeat({
-    vertices: loadedVertices,
-    enmeatenMode,
-    enmeatenCurveFnName,
-  });
+  callRenderMeat();
+}
+
+function onEnmeatenExtraRoundnessChange(e) {
+  extraRoundness = e.target.value;
+  callRenderMeat();
 }
 
 function onSVGFileChange() {
