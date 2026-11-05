@@ -11,6 +11,7 @@ var bboxField = document.getElementById('vertices-bbox-field');
 export function renderVertices({
   vertices,
   onVerticesChange,
+  onVertexClick,
   addMode,
   deleteMode,
 }) {
@@ -19,7 +20,7 @@ export function renderVertices({
   points
     .enter()
     .append('circle')
-    .attr('r', 1)
+    .attr('r', 4)
     .each(saveIndex)
     .merge(points)
     .on('click', onCircleClick)
@@ -42,12 +43,14 @@ export function renderVertices({
     index.set(this, i);
   }
 
-  function onCircleClick() {
+  function onCircleClick(_e, vertex) {
+    const i = index.get(this);
     if (deleteMode) {
       let editedVertices = vertices.slice();
-      editedVertices.splice(index.get(this), 1);
+      editedVertices.splice(i, 1);
       onVerticesChange({ vertices: editedVertices });
     }
+    onVertexClick(vertex, i);
   }
 
   function onBoardClick(e) {

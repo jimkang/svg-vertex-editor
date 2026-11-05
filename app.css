@@ -71,8 +71,9 @@ svg {
   background-color: #ddd;
 }
 
-circle {
+#vertices circle {
   fill: hsla(300, 50%, 50%, 0.75);
+  cursor: pointer;
 }
 
 textarea {
@@ -135,6 +136,13 @@ h4 {
 #meat {
   stroke: hsl(0, 50%, 30%);
   fill: hsl(350, 60%, 50%);
+}
+
+#point-details {
+  border: solid 1px #333;
+  border-radius: 8px;
+  padding: 1em;
+  margin-top: 1em;
 }
 
 @media all and (max-height: 568px) {

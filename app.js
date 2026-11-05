@@ -10,6 +10,7 @@ import { renderAddMode } from './renderers/render-add-mode';
 import { renderDeleteMode } from './renderers/render-delete-mode';
 import { renderTextControls } from './renderers/render-text-controls';
 import { renderEnmeatenMode } from './renderers/render-enmeaten-mode';
+import { renderPointDetails } from './renderers/render-point-details';
 import { cleanVertices } from './util/svg-utils';
 import { pairsToXYObjects } from './util/formats';
 
@@ -21,6 +22,7 @@ var enmeatenCurveFnName = 'bezierShaper';
 var offsetsField = document.getElementById('vertices-offsets-field');
 var seed;
 var extraRoundness = 0;
+var indexesToSharpenSet = new Set();
 
 // TODO: Get coords into [x, y]. Then, enmeaten them!
 (async function go() {
@@ -65,29 +67,30 @@ function callRenderMeat() {
     enmeatenCurveFnName,
     extraRoundness,
     seed,
+    indexesToSharpen: [...indexesToSharpenSet],
+  });
+}
+
+function callRenderVertices() {
+  renderVertices({
+    vertices: loadedVertices,
+    onVerticesChange: onVertices,
+    addMode,
+    deleteMode,
+    onVertexClick,
   });
 }
 
 function onAddModeChange() {
   addMode = !addMode;
   renderAddMode({ addMode, onAddModeChange });
-  renderVertices({
-    vertices: loadedVertices,
-    onVerticesChange: onVertices,
-    addMode,
-    deleteMode,
-  });
+  callRenderVertices();
 }
 
 function onDeleteModeChange() {
   deleteMode = !deleteMode;
   renderDeleteMode({ deleteMode, onDeleteModeChange });
-  renderVertices({
-    vertices: loadedVertices,
-    onVerticesChange: onVertices,
-    addMode,
-    deleteMode,
-  });
+  callRenderVertices();
 }
 
 function onEnmeatenCurveFnChange(e) {
@@ -168,12 +171,8 @@ function onMoveVertices() {
 
 function onVertices({ vertices }) {
   loadedVertices = cleanVertices(vertices);
-  renderVertices({
-    vertices: loadedVertices,
-    onVerticesChange: onVertices,
-    addMode,
-    deleteMode,
-  });
+  callRenderVertices();
+
   renderTextControls({ onVertices, vertices: loadedVertices });
 
   var verticesRoot = document.getElementById('vertices');
@@ -192,6 +191,23 @@ function onVertices({ vertices }) {
     enmeatenCurveFnName,
     seed,
   });
+}
+
+function onVertexClick(vertex, i) {
+  console.log('vertex', vertex, 'i', i);
+  renderPointDetails({
+    point: vertex,
+    index: i,
+    indexesToSharpenSet,
+    onPointUpdate,
+  });
+}
+
+function onPointUpdate({ point, index, updatedIndexesToSharpenSet }) {
+  loadedVertices[index] = point;
+  indexesToSharpenSet = updatedIndexesToSharpenSet;
+  callRenderVertices();
+  callRenderMeat();
 }
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {

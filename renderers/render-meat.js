@@ -16,6 +16,7 @@ export function renderMeat({
   vertices,
   extraRoundness = 0,
   enmeatenCurveFnName = 'curveBasisClosed',
+  indexesToSharpen = [],
   seed,
 }) {
   var meatPath;
@@ -36,7 +37,6 @@ export function renderMeat({
   if (enmeatenCurveFnName === 'bezierShaper') {
     // TODO: indexesToSharpen input.
     // What are the other differences with meat-to-html?
-    let indexesToSharpen = [0, 3];
     let { path, curves } = curveFnByName[enmeatenCurveFnName](
       meatPoints,
       indexesToSharpen
